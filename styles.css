@@ -1,0 +1,27 @@
+body {
+  background-color: #293742;
+}
+
+.fa-github {
+  color: #0F9960;
+}
+
+.logo {
+  width: 500px;
+}
+
+.h-100 {
+  height: 100vh !important;
+}
+
+.text-red {
+  color: #DB3737 !important;
+}
+
+.w-exact-500 {
+  max-width: 500px !important;
+}
+
+.w-exact-250 {
+  min-width: 250px !important;
+}
