@@ -1,0 +1,19 @@
+{
+  "name": "zen-focus-landing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "surge --domain https://zenfocus.surge.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/builtwithluv/ZenFocusLanding.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/builtwithluv/ZenFocusLanding/issues"
+  },
+  "homepage": "https://github.com/builtwithluv/ZenFocusLanding#readme"
+}
