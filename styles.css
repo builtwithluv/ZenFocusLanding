@@ -2,16 +2,12 @@ body {
   background-color: #fff;
 }
 
-.fa-github {
-  color: #0F9960;
-}
-
 .logo {
   width: 25px;
 }
 
 .h-100 {
-  height: calc(100vh - 46px) !important;
+  height: calc(100vh - 49px) !important;
 }
 
 .text-red {
