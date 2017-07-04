@@ -67,11 +67,11 @@
 
       <div class="d-flex timer">
         <div class="timer-minutes timer-secondary">
-          25
+          00
         </div>
         <div class="timer-divider">:</div>
         <div class="timer-seconds timer-secondary">
-          00
+          59
         </div>
       </div>
 
@@ -139,11 +139,43 @@
 
   <script>
     const countdownEl = document.querySelector("#countdown-timer");
-    const spinner = React.createElement(Blueprint.Core.Spinner, {
-      value: 0.3,
-      intent: Blueprint.Core.Intent.DANGER
-    });
-    ReactDOM.render(spinner, countdownEl);
+
+    class Timer extends React.Component {
+      constructor() {
+        super();
+        this.state = {
+          seconds: 60
+        };
+      }
+
+      tick() {
+        const { seconds } = this.state;
+        if (seconds === 0) return;
+        this.setState({ seconds: this.state.seconds - 1 });
+      }
+
+      componentDidMount() {
+        setInterval(this.tick.bind(this), 1000);
+      }
+
+      render() {
+        return React.createElement(Blueprint.Core.Spinner, {
+          value: 1 - this.state.seconds / 60,
+          intent: Blueprint.Core.Intent.DANGER
+        });
+      }
+    }
+
+    ReactDOM.render(React.createElement(Timer), countdownEl);
+  </script>
+
+  <script>
+    const seconds = document.querySelector(".timer-seconds");
+    setInterval(() => {
+      const oldVal = seconds.innerText;
+      const newVal = oldVal - 1;
+      seconds.innerText = newVal.length === 1 ? `0${newVal}` : newVal;
+    }, 1000);
   </script>
 </body>
 
