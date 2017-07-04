@@ -60,38 +60,46 @@
   </nav>
 
   <div class="text-center d-flex flex-column justify-content-center align-items-center h-100">
-    <img
-      src="https://res.cloudinary.com/lc8bqflyz/image/upload/v1496717548/ZenFocus/monitor.png"
-      alt="monitor"
-      class="img-fluid"
-    >
-
-    <div class="row">
-      <div class="col-lg-6 mb-3 w-exact-250">
-        <a
-          download
-          class="d-block btn btn-primary mt-3"
-          href="https://github.com/builtwithluv/ZenFocus/releases/download/v1.0.1/zen-focus-setup-1.0.1.exe"
-          role="button"
-          onclick="sendGADownload('windows')"
-        >
-          <i class="fa fa-windows fa-5x mb-3" aria-hidden="true"></i>
-          <div>Download for Windows</div>
-          <div>v1.0.1</div>
-        </a>
+    <div class="countdown-timer-container d-flex flex-column align-items-center justify-content-center">
+      <div style="position: absolute">
+        <div id="countdown-timer"></div>
       </div>
-      <div class="col-lg-6 mb-3 w-exact-250">
-        <a
-          download
-          class="d-block btn btn-primary mt-3"
-          href="https://github.com/builtwithluv/ZenFocus/releases/download/v1.0.0/zen-focus-1.0.0-mac.zip"
-          role="button"
-          onclick="sendGADownload('mac')"
-        >
-          <i class="fa fa-apple fa-5x mb-3" aria-hidden="true"></i>
-          <div>Download for Mac</div>
-          <div>v1.0.0</div>
-        </a>
+
+      <div class="d-flex timer">
+        <div class="timer-minutes timer-secondary">
+          25
+        </div>
+        <div class="timer-divider">:</div>
+        <div class="timer-seconds timer-secondary">
+          00
+        </div>
+      </div>
+
+      <div class="row hidden-xs-down" style="z-index: 2">
+        <div class="col-xs-6" style="width: 60px">
+          <a
+            download
+            href="https://github.com/builtwithluv/ZenFocus/releases/download/v1.0.1/zen-focus-setup-1.0.1.exe"
+            role="button"
+            onclick="sendGADownload('windows')"
+          >
+            <i class="fa fa-windows fa-3x mb-3" aria-hidden="true"></i>
+          </a>
+        </div>
+        <div class="col-xs-6 ml-3" style="width: 60px">
+          <a
+            download
+            href="https://github.com/builtwithluv/ZenFocus/releases/download/v1.0.0/zen-focus-1.0.0-mac.zip"
+            role="button"
+            onclick="sendGADownload('mac')"
+          >
+            <i class="fa fa-apple fa-3x mb-3" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="font-bold hidden-sm-up">
+        Available for desktop
       </div>
     </div>
 
@@ -128,6 +136,15 @@
   <script src="https://unpkg.com/react@^15.3.1/dist/react-with-addons.min.js"></script>
   <script src="https://unpkg.com/react-dom@^15.3.1/dist/react-dom.min.js"></script>
   <script src="https://unpkg.com/@blueprintjs/core@^1.11.0"></script>
+
+  <script>
+    const countdownEl = document.querySelector("#countdown-timer");
+    const spinner = React.createElement(Blueprint.Core.Spinner, {
+      value: 0.3,
+      intent: Blueprint.Core.Intent.DANGER
+    });
+    ReactDOM.render(spinner, countdownEl);
+  </script>
 </body>
 
 </html>
