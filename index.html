@@ -71,7 +71,7 @@
         </div>
         <div class="timer-divider">:</div>
         <div class="timer-seconds timer-secondary">
-          59
+          25
         </div>
       </div>
 
@@ -109,6 +109,8 @@
       </footer>
     </div>
 
+    <audio id="sound-tick" src="assets/tick.mp3" title="Tick" />
+    <audio id="sound-ding" src="assets/corsica-ding.mp3" title="Ding" />
   </div>
 
   <!-- Google Analytics -->
@@ -138,24 +140,35 @@
   <script src="https://unpkg.com/@blueprintjs/core@^1.11.0"></script>
 
   <script>
-    const countdownEl = document.querySelector("#countdown-timer");
+    const countdownEl = document.querySelector('#countdown-timer');
+    const tick = document.querySelector('#sound-tick');
 
     class Timer extends React.Component {
       constructor() {
         super();
         this.state = {
-          seconds: 60
+          seconds: 25
         };
       }
 
       tick() {
         const { seconds } = this.state;
-        if (seconds === 0) return;
-        this.setState({ seconds: this.state.seconds - 1 });
+
+        this.setState(prevState => {
+          if (prevState.seconds < 1) {
+            clearInterval(this.interval);
+            return { seconds: 0 };
+          }
+
+          tick.play();
+          return {
+            seconds: prevState.seconds - 1
+          };
+        });
       }
 
       componentDidMount() {
-        setInterval(this.tick.bind(this), 1000);
+        this.interval = setInterval(() => this.tick(), 1000);
       }
 
       render() {
@@ -170,11 +183,20 @@
   </script>
 
   <script>
-    const seconds = document.querySelector(".timer-seconds");
-    setInterval(() => {
+    const seconds = document.querySelector('.timer-seconds');
+    const ding = document.querySelector('#sound-ding');
+
+    const interval = setInterval(() => {
       const oldVal = seconds.innerText;
       const newVal = oldVal - 1;
-      seconds.innerText = newVal.length === 1 ? `0${newVal}` : newVal;
+
+      if (newVal < 1) {
+        clearInterval(interval);
+        seconds.innerText = '00';
+        ding.play();
+      } else {
+        seconds.innerText = newVal < 10 ? `0${newVal}` : newVal;
+      }
     }, 1000);
   </script>
 </body>
